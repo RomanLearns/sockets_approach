@@ -2,6 +2,49 @@
 
 This is a multiplayer Tic Tac Toe game built using Python for the server with WebSockets and React for the client-side interface. Players can connect and play on the same machine or across different machines on the same Wi-Fi network.
 
+
+:::mermaid
+graph LR
+    subgraph Client[Browser - React App]
+        C_UI[User Interface<br>React Components]
+        C_State[Client State<br>React State, Context]
+        C_WS_Client[Browser WebSocket Client]
+        C_WS_Context[WebSocket Context<br>ws instance, sendMessage]
+
+        C_UI -->|User Actions e.g., clicks| C_State
+        C_State -->|Updates| C_UI
+        C_UI -->|Triggers Messages| C_WS_Context
+        C_WS_Context -->|Sends/Receives| C_WS_Client
+
+        C_WS_Client -->|WebSocket Port 8765| S_WS_Listener
+        C_WS_Client -->|Sends/Receives JSON| S_WS_Listener
+    end
+
+    subgraph Server[Python Server]
+        direction LR
+        S_Asyncio[Asyncio Event Loop]
+        S_WS_Listener[WebSocket Listener<br>websockets.serve, Port 8765]
+        S_Message_Processor[Message Processor<br>handle_client, process_message]
+        S_State_Locked[Server State<br>CLIENTS, GAMES, AVAILABLE_GAMES<br>with Asyncio Lock]
+        S_Game_Logic[TicTacToeGame Logic<br>Board, Rules]
+        S_Periodic_Broadcast[Periodic Broadcast Task<br>Lobby Updates]
+
+        S_Asyncio --> S_WS_Listener
+        S_Asyncio --> S_Message_Processor
+        S_Asyncio --> S_Periodic_Broadcast
+
+        S_WS_Listener -->|Passes Connections| S_Message_Processor
+        S_Message_Processor -->|Accesses/Modifies| S_State_Locked
+        S_State_Locked -->|Provides State| S_Message_Processor
+        S_Message_Processor -->|Executes Logic| S_Game_Logic
+        S_Game_Logic -->|Returns State/Results| S_Message_Processor
+        S_Periodic_Broadcast -->|Reads State| S_State_Locked
+        S_Periodic_Broadcast -->|Sends Updates| S_WS_Listener
+    end
+
+    C_WS_Client <-->|WebSocket Port 8765| S_WS_Listener
+:::
+
 ## Prerequisites
 
 - **Python 3.11+** with the `websockets` package:
