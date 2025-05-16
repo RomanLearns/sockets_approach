@@ -1,0 +1,173 @@
+/* Overall page background/styling (optional, apply to body or a main container) */
+body {
+    background-color: #f4f7f6; /* Light grey background for the page */
+    font-family: 'Arial', sans-serif; /* Use a cleaner font */
+    margin: 0;
+    padding: 20px; /* Padding around the content */
+}
+
+/* --- Lobby Container --- */
+.lobby-container {
+    width: 90%; /* Responsive width */
+    max-width: 600px; /* Max width on large screens */
+    margin: 40px auto; /* Center the container with more vertical space */
+    padding: 30px; /* More padding inside */
+    background-color: #ffffff; /* White background */
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* Stronger, softer shadow */
+    text-align: center; /* Center content horizontally */
+}
+
+/* --- Headings --- */
+.lobby-container h2 {
+    color: #333; /* Darker, more prominent color */
+    margin-bottom: 25px; /* More space below the welcome message */
+    font-size: 2em; /* Larger welcome message */
+    font-weight: bold;
+    /* text-align: center; -- already handled by .lobby-container */
+}
+
+.lobby-container h3 {
+    color: #555; /* Slightly darker than before */
+    margin-top: 35px; /* More space above */
+    margin-bottom: 20px; /* More space below */
+    border-bottom: 2px solid #f0f0f0; /* Thicker, lighter border */
+    padding-bottom: 10px; /* More padding below border */
+    font-size: 1.3em; /* Slightly larger */
+    font-weight: normal;
+    text-align: left; /* Align heading to the left within the container */
+}
+
+/* --- Buttons (Create Game) --- */
+.lobby-container button {
+    display: inline-block; /* Treat as block for margin/padding but allows text align center */
+    padding: 12px 25px; /* More padding */
+    background-color: #28a745; /* Green color for Create Game */
+    color: white;
+    border: none;
+    border-radius: 6px; /* Slightly more rounded */
+    cursor: pointer;
+    font-size: 1.1em; /* Slightly larger font */
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transition */
+    margin-bottom: 30px; /* More space below the button */
+    text-decoration: none; /* Ensure no underline */
+    -webkit-appearance: none; /* Improve cross-browser consistency */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.lobby-container button:hover:not(:disabled) {
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-2px); /* Subtle lift effect */
+}
+
+.lobby-container button:active:not(:disabled) {
+     transform: translateY(0); /* Return to original position on click */
+}
+
+
+/* --- Disabled Button State --- */
+.lobby-container button:disabled {
+    background-color: #cccccc; /* Grey color */
+    cursor: not-allowed;
+    opacity: 0.7; /* Slightly transparent */
+    transform: none; /* No lift effect when disabled */
+}
+
+/* --- Error Message --- */
+.lobby-container .error-message {
+    margin-top: 20px; /* More space above */
+    padding: 15px; /* More padding */
+    border-radius: 6px; /* More rounded */
+    color: #721c24; /* Dark red text */
+    background-color: #f8d7da; /* Light red background */
+    border: 1px solid #f5c6cb; /* Red border */
+    font-weight: bold;
+    font-size: 1em;
+    text-align: left; /* Align error message text left */
+    word-break: break-word; /* Prevent long messages from overflowing */
+}
+
+/* --- Info Message (e.g., "Connecting...") --- */
+.lobby-container .info-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    color: #004085; /* Dark blue text */
+    background-color: #cce5ff; /* Light blue background */
+    border: 1px solid #b8daff; /* Blue border */
+    font-weight: normal;
+    font-size: 1em;
+    text-align: left;
+    word-break: break-word;
+}
+
+
+/* --- Available Games List (ul) --- */
+.lobby-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left; /* Align list content to the left */
+}
+
+/* --- List Items (li) --- */
+.lobby-container li {
+    background-color: #fefefe; /* Very light background */
+    border: 1px solid #eee; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 12px; /* More space between items */
+    padding: 15px 20px; /* More padding */
+    display: flex;
+    justify-content: space-between; /* Space out text and button */
+    align-items: center; /* Vertically align items */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.lobby-container li:hover {
+    background-color: #f0f0f0; /* Slight hover effect on list items */
+    border-color: #ddd;
+}
+
+/* --- Join Button within List Items --- */
+.lobby-container li button {
+    /* Override some button styles for join button */
+    margin-bottom: 0; /* Remove bottom margin */
+    padding: 8px 15px; /* Smaller padding */
+    font-size: 0.9em; /* Smaller font */
+    background-color: #6c757d; /* Grey color for Join */
+    font-weight: normal; /* Less bold */
+    border-radius: 4px; /* Smaller border-radius */
+    transition: background-color 0.2s ease; /* Faster transition */
+    transform: none; /* No lift effect on join buttons */
+}
+
+.lobby-container li button:hover:not(:disabled) {
+    background-color: #5a6268; /* Darker grey on hover */
+    transform: none; /* No lift effect on hover */
+}
+
+/* Disabled Join Button State */
+.lobby-container li button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* --- Style for the "No available games" message --- */
+.lobby-container li.no-games {
+    text-align: center; /* Center the 'No available games' text */
+    color: #888; /* Grey text */
+    justify-content: center; /* Center content in flex */
+    padding: 20px; /* More padding */
+    background-color: #f9f9f9;
+    border: 1px dashed #ddd; /* Dashed border */
+    font-style: italic;
+}
+
+/* Remove hover effect for the no-games message */
+.lobby-container li.no-games:hover {
+    background-color: #f9f9f9;
+    border-color: #ddd;
+}

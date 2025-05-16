@@ -1,0 +1,6 @@
+venv/
+myenv/
+Or/
+client/node_modules
+server/__pycache__
+#/
