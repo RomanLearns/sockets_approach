@@ -3,7 +3,7 @@
 This is a multiplayer Tic Tac Toe game built using Python for the server with WebSockets and React for the client-side interface. Players can connect and play on the same machine or across different machines on the same Wi-Fi network.
 
 
-:::mermaid
+```mermaid
 graph LR
     subgraph Client[Browser - React App]
         C_UI[User Interface<br>React Components]
@@ -43,7 +43,7 @@ graph LR
     end
 
     C_WS_Client <-->|WebSocket Port 8765| S_WS_Listener
-:::
+```
 
 ## Prerequisites
 
